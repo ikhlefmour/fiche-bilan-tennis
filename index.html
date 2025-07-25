@@ -9,7 +9,6 @@
             body { margin: 0; }
             .no-print { display: none; }
         }
-        
         body {
             font-family: Arial, sans-serif;
             margin: 10px;
@@ -18,45 +17,38 @@
             line-height: 1.2;
             font-size: 12px;
         }
-        
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 15px;
         }
-        
-         .title {
+        .title {
             text-align: center;
             font-size: 20px;
             font-weight: bold;
             margin: 15px 0 30px 0; 
             letter-spacing: 2px;
         }
-        
         .form-section {
             margin-bottom: 10px;
         }
-        
         .form-row {
             display: flex;
             gap: 20px;
             margin-bottom: 8px;
             align-items: center;
         }
-        
         .form-field {
             display: flex;
             align-items: center;
             gap: 8px;
         }
-        
         .form-field label {
             font-weight: bold;
             min-width: 100px;
             font-size: 11px;
         }
-        
         .form-field input[type="text"], .form-field input[type="number"] {
             border: 2px solid black;
             padding: 4px;
@@ -65,25 +57,21 @@
             height: 20px;
             font-size: 11px;
         }
-        
         .checkbox-group {
             display: flex;
             gap: 10px;
             align-items: center;
         }
-        
         .checkbox-group input[type="checkbox"] {
             width: 15px;
             height: 15px;
             accent-color: black;
         }
-        
         .stats-table {
             width: 100%;
             border-collapse: collapse;
             margin: 10px 0;
         }
-        
         .stats-table th, .stats-table td {
             border: 2px solid black;
             padding: 8px;
@@ -91,11 +79,9 @@
             font-weight: bold;
             font-size: 11px;
         }
-        
         .stats-table th {
             background: #f5f5f5;
         }
-        
         .stats-table input {
             border: none;
             background: transparent;
@@ -104,16 +90,13 @@
             font-weight: bold;
             font-size: 11px;
         }
-        
         .evaluation-section {
             margin: 10px 0;
         }
-        
         .evaluation-table {
             width: 100%;
             border-collapse: collapse;
         }
-        
         .evaluation-table th {
             background: black;
             color: white;
@@ -122,23 +105,19 @@
             font-size: 12px;
             font-weight: bold;
         }
-        
         .evaluation-row {
             border: 2px solid black;
         }
-        
         .evaluation-row td {
             padding: 6px;
             border-right: 2px solid black;
             font-weight: bold;
             font-size: 11px;
         }
-        
         .evaluation-row td:first-child {
             background: #f9f9f9;
             min-width: 180px;
         }
-        
         .color-options {
             display: flex;
             gap: 10px;
@@ -146,7 +125,6 @@
             align-items: center;
             padding: 4px;
         }
-        
         .color-radio {
             width: 20px;
             height: 20px;
@@ -155,16 +133,18 @@
             cursor: pointer;
             position: relative;
             transition: transform 0.2s;
+            outline: none;
         }
-        
+        .color-radio:focus-within, .color-radio:focus {
+            box-shadow: 0 0 2px 2px #1E90FF;
+            outline: 2px solid #1E90FF;
+        }
         .color-radio:hover {
             transform: scale(1.1);
         }
-        
         .color-radio input[type="radio"] {
             display: none;
         }
-        
         .color-radio input[type="radio"]:checked + .color-circle::after {
             content: '✓';
             position: absolute;
@@ -176,35 +156,28 @@
             font-size: 18px;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
         }
-        
         .color-circle {
             width: 100%;
             height: 100%;
             border-radius: 50%;
             position: relative;
         }
-        
         .red { background-color: #DC143C; }
         .orange { background-color: #FF8C00; }
         .green { background-color: #228B22; }
-	    .blue { background-color: #1E90FF; }
-
-        
+        .blue { background-color: #1E90FF; }
         .comments-section {
             margin-top: 20px;
         }
-        
         .comment-field {
             margin-bottom: 15px;
         }
-        
         .comment-field label {
             font-weight: bold;
             display: block;
             margin-bottom: 8px;
             font-size: 16px;
         }
-        
         .comment-field textarea {
             width: 100%;
             border: 3px solid black;
@@ -213,39 +186,32 @@
             font-family: Arial, sans-serif;
             font-size: 14px;
         }
-        
         .comment-field.small textarea {
             height: 60px;
         }
-        
         .comment-field.large textarea {
             height: 80px;
         }
-        
         .footer-fields {
             display: flex;
             gap: 40px;
             margin-top: 15px;
         }
-        
         .footer-field {
             flex: 1;
         }
-        
         .footer-field label {
             font-weight: bold;
             display: block;
             margin-bottom: 8px;
             font-size: 16px;
         }
-        
         .footer-field input {
             width: 100%;
             border: 3px solid black;
             padding: 12px;
             font-size: 14px;
         }
-        
         .download-btn {
             background: #DC143C;
             color: white;
@@ -259,17 +225,19 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             transition: all 0.3s;
         }
-        
         .download-btn:hover {
             background: #B22222;
             transform: translateY(-2px);
             box-shadow: 0 6px 12px rgba(0,0,0,0.3);
         }
-        
         .section-divider {
             margin: 20px 0;
             height: 3px;
             background: #333;
+        }
+        input:focus, textarea:focus, select:focus {
+            outline: 2px solid #1E90FF !important;
+            box-shadow: 0 0 2px 2px #1E90FF !important;
         }
     </style>
 </head>
@@ -277,61 +245,50 @@
     <div class="no-print">
         <button class="download-btn" onclick="generatePDF()">📄 TÉLÉCHARGER LE PDF INTERACTIF</button>
     </div>
-
     <div style="display: flex; justify-content: center; margin-top: 10px; margin-bottom: 10px;">
-      <img src="https://ikhlefmour.github.io/fiche-bilan-tennis/logo.png" alt="Logo"
-        style="height: 240px; width: auto; display: block;">
+        <img src="https://ikhlefmour.github.io/fiche-bilan-tennis/logo.png" alt="Logo"
+            style="height: 240px; width: auto; display: block;">
     </div>
-
-<h1 class="title">BILAN INDIVIDUEL - STAGE SABLES D'OLONNE 2025</h1><br>
-
-<p style="font-size:15px; margin-bottom: 25px; margin-top: -10px;">
-    Ce document est un bilan personnalisé pour aider le joueur à progresser à la suite du stage Coaching Spirit x HRT. Il sera transmis à la famille et au coach référent pour poursuivre un travail ciblé.
-</p><br>
-
-
-<div class="form-section">
-    
+    <h1 class="title">BILAN INDIVIDUEL - STAGE SABLES D'OLONNE 2025</h1><br>
+    <p style="font-size:15px; margin-bottom: 25px; margin-top: -10px;">
+        Ce document est un bilan personnalisé pour aider le joueur à progresser à la suite du stage Coaching Spirit x HRT. Il sera transmis à la famille et au coach référent pour poursuivre un travail ciblé.
+    </p><br>
     <div class="form-section">
         <div class="form-row">
-    <div class="form-field">
-        <label>Nom</label>
-        <input type="text" id="nom" name="nom" placeholder="Saisir le nom">
-    </div>
-    <div class="form-field">
-        <label>Prénom</label>
-        <input type="text" id="prenom" name="prenom" placeholder="Saisir le prénom">
-    </div>
-    <div class="form-field" style="display:flex; align-items:center; gap:8px;">
-        <label style="margin-right:4px;">Genre</label>
-        <label style="display:flex; align-items:center; gap:2px; font-weight:normal;">
-            <input type="radio" id="masculin" name="sexe" value="M">
-            Masculin
-        </label>
-        <label style="display:flex; align-items:center; gap:2px; font-weight:normal;">
-            <input type="radio" id="feminin" name="sexe" value="F">
-            Féminin
-        </label>
-    </div>
-</div>
-
-
-        
-        <div class="form-row">
             <div class="form-field">
-                <label>Année de naissance</label>
-                <input type="text" id="annee_naissance" name="annee_naissance" placeholder="2010">
+                <label for="nom">Nom</label>
+                <input type="text" id="nom" name="nom" placeholder="Saisir le nom" aria-label="Nom">
             </div>
             <div class="form-field">
-                <label>Classement</label>
-                <input type="text" id="classement" name="classement" placeholder="15/5">
+                <label for="prenom">Prénom</label>
+                <input type="text" id="prenom" name="prenom" placeholder="Saisir le prénom" aria-label="Prénom">
+            </div>
+            <div class="form-field" style="display:flex; align-items:center; gap:8px;">
+                <label style="margin-right:4px;">Genre</label>
+                <label for="masculin" style="display:flex; align-items:center; gap:2px; font-weight:normal;">
+                    <input type="radio" id="masculin" name="sexe" value="M" aria-label="Masculin">
+                    Masculin
+                </label>
+                <label for="feminin" style="display:flex; align-items:center; gap:2px; font-weight:normal;">
+                    <input type="radio" id="feminin" name="sexe" value="F" aria-label="Féminin">
+                    Féminin
+                </label>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-field">
+                <label for="annee_naissance">Année de naissance</label>
+                <input type="text" id="annee_naissance" name="annee_naissance" placeholder="2010" aria-label="Année de naissance">
+            </div>
+            <div class="form-field">
+                <label for="classement">Classement</label>
+                <input type="text" id="classement" name="classement" placeholder="15/5" aria-label="Classement">
             </div>
         </div>
     </div>
-    
     <div class="section-divider"></div>
-    
-    <table class="stats-table">
+    <!-- TABLEAU DE STATS -->
+    <table class="stats-table" aria-label="Statistiques">
         <thead>
             <tr>
                 <th>Matchs joués</th>
@@ -342,525 +299,325 @@
         </thead>
         <tbody>
             <tr>
-                <td><input type="number" id="matchs_joues" name="matchs_joues" placeholder="0" min="0"></td>
-                <td><input type="number" id="victoires" name="victoires" placeholder="0" min="0"></td>
-                <td><input type="number" id="defaites" name="defaites" placeholder="0" min="0" readonly></td>
-                <td><input type="number" id="pourcentage" name="pourcentage" placeholder="0" readonly>%</td>
+                <td><input type="number" id="matchs_joues" name="matchs_joues" placeholder="0" min="0" aria-label="Matchs joués"></td>
+                <td><input type="number" id="victoires" name="victoires" placeholder="0" min="0" aria-label="Victoires"></td>
+                <td><input type="number" id="defaites" name="defaites" placeholder="0" min="0" readonly aria-label="Défaites"></td>
+                <td><input type="number" id="pourcentage" name="pourcentage" placeholder="0" readonly aria-label="Pourcentage de victoires">%</td>
             </tr>
         </tbody>
     </table>
-    
     <div class="section-divider"></div>
-    
     <div style="margin: 10px 0; font-size: 12px; text-align: center;">
-  <b>Légende couleurs :</b>
-  <span style="color:#DC143C;">● Rouge</span> (Insuffisant)  |  <span style="color:#FF8C00;">● Orange</span> (Moyen)  |  <span style="color:#228B22;">● Vert</span> (Bien)  |  <span style="color:#1E90FF;">● Bleu</span> (Excellent)
-</div>
+        <b>Légende couleurs :</b>
+        <span style="color:#DC143C;">● Rouge</span> (Insuffisant)  |  <span style="color:#FF8C00;">● Orange</span> (Moyen)  |  <span style="color:#228B22;">● Vert</span> (Bien)  |  <span style="color:#1E90FF;">● Bleu</span> (Excellent)
+    </div>
     <div class="section-divider"></div>
-    
+
+    <!-- --- BLOC FRAPPE --- -->
     <div class="evaluation-section">
         <table class="evaluation-table">
-    <thead>
-        <tr>
-            <th style="width: 35%;">Bloc d'observation Tennis : Qualité frappe</th>
-	    <th>Évaluation</th>
-        </tr>
-
-    </thead>
-    <tbody>
-        <tr class="evaluation-row">
-            <td>Qualité de frappe dans l'échange</td>
-            <td>
-                <div class="color-options">
-                    <label class="color-radio">
-                        <input type="radio" name="frappe_echange" value="red">
-                        <div class="color-circle red"></div>
-                    </label>
-                    <label class="color-radio">
-                        <input type="radio" name="frappe_echange" value="orange">
-                        <div class="color-circle orange"></div>
-                    </label>
-                    <label class="color-radio">
-                        <input type="radio" name="frappe_echange" value="green">
-                        <div class="color-circle green"></div>
-                    </label>
-                    <label class="color-radio">
-                        <input type="radio" name="frappe_echange" value="blue">
-                        <div class="color-circle blue"></div>
-                    </label>
-                </div>
-            </td>
-        </tr>
-        <tr class="evaluation-row">
-            <td>Qualité de frappe pour faire la différence</td>
-            <td>
-                <div class="color-options">
-                    <label class="color-radio">
-                        <input type="radio" name="frappe_difference" value="red">
-                        <div class="color-circle red"></div>
-                    </label>
-                    <label class="color-radio">
-                        <input type="radio" name="frappe_difference" value="orange">
-                        <div class="color-circle orange"></div>
-                    </label>
-                    <label class="color-radio">
-                        <input type="radio" name="frappe_difference" value="green">
-                        <div class="color-circle green"></div>
-                    </label>
-                    <label class="color-radio">
-                        <input type="radio" name="frappe_difference" value="blue">
-                        <div class="color-circle blue"></div>
-                    </label>
-                </div>
-            </td>
-        </tr>
-    </tbody>
-</table>      
-        
-<div class="comments-section">
-    <div class="comment-field small">
-            <label>Commentaires sur les qualités de frappe</label>
-            <textarea id="qualites" name="qualites" placeholder="Saisir les qualités de frappe du joueur..."></textarea>
+            <thead>
+                <tr>
+                    <th style="width: 35%;">Bloc d'observation Tennis : Qualité frappe</th>
+                    <th>Évaluation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="evaluation-row">
+                    <td>Qualité de frappe dans l'échange</td>
+                    <td>
+                        <div class="color-options" aria-label="Évaluation Qualité de frappe dans l'échange">
+                            <label class="color-radio" tabindex="0"><input type="radio" name="frappe_echange" value="red" aria-label="Insuffisant"><div class="color-circle red"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="frappe_echange" value="orange" aria-label="Moyen"><div class="color-circle orange"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="frappe_echange" value="green" aria-label="Bien"><div class="color-circle green"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="frappe_echange" value="blue" aria-label="Excellent"><div class="color-circle blue"></div></label>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="evaluation-row">
+                    <td>Qualité de frappe pour faire la différence</td>
+                    <td>
+                        <div class="color-options" aria-label="Évaluation Qualité de frappe pour faire la différence">
+                            <label class="color-radio" tabindex="0"><input type="radio" name="frappe_difference" value="red" aria-label="Insuffisant"><div class="color-circle red"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="frappe_difference" value="orange" aria-label="Moyen"><div class="color-circle orange"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="frappe_difference" value="green" aria-label="Bien"><div class="color-circle green"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="frappe_difference" value="blue" aria-label="Excellent"><div class="color-circle blue"></div></label>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="comments-section">
+            <div class="comment-field small">
+                <label for="qualites_frappe">Commentaires sur les qualités de frappe</label>
+                <textarea id="qualites_frappe" name="qualites_frappe" placeholder="Saisir les qualités de frappe du joueur..." aria-label="Commentaires sur les qualités de frappe"></textarea>
+            </div>
+        </div>
     </div>
-</div>
-
-
-
     <div class="section-divider"></div>
-    
+
+    <!-- --- BLOC SERVICE --- -->
     <div class="evaluation-section">
         <table class="evaluation-table">
-    <thead>
-        <tr>
-            <th style="width: 35%;">Bloc d'observation Tennis : Service</th>
-	    <th>Évaluation</th>
-        </tr>
-
-    </thead>
-    <tbody>
-        <tr class="evaluation-row">
-            <td>Qualité 1ère balle</td>
-            <td>
-                <div class="color-options">
-                    <label class="color-radio">
-                        <input type="radio" name="service_1" value="red">
-                        <div class="color-circle red"></div>
-                    </label>
-                    <label class="color-radio">
-                        <input type="radio" name="service_1" value="orange">
-                        <div class="color-circle orange"></div>
-                    </label>
-                    <label class="color-radio">
-                        <input type="radio" name="service_1" value="green">
-                        <div class="color-circle green"></div>
-                    </label>
-                    <label class="color-radio">
-                        <input type="radio" name="service_1" value="blue">
-                        <div class="color-circle blue"></div>
-                    </label>
-                </div>
-            </td>
-        </tr>
-        <tr class="evaluation-row">
-            <td>Qualité 2ème balle</td>
-            <td>
-                <div class="color-options">
-                    <label class="color-radio">
-                        <input type="radio" name="service_2" value="red">
-                        <div class="color-circle red"></div>
-                    </label>
-                    <label class="color-radio">
-                        <input type="radio" name="service_2" value="orange">
-                        <div class="color-circle orange"></div>
-                    </label>
-                    <label class="color-radio">
-                        <input type="radio" name="service_2" value="green">
-                        <div class="color-circle green"></div>
-                    </label>
-                    <label class="color-radio">
-                        <input type="radio" name="service_2" value="blue">
-                        <div class="color-circle blue"></div>
-                    </label>
-                </div>
-            </td>
-        </tr>
-    <tr class="evaluation-row">
-            <td>Variations</td>
-            <td>
-                <div class="color-options">
-                    <label class="color-radio">
-                        <input type="radio" name="variations" value="red">
-                        <div class="color-circle red"></div>
-                    </label>
-                    <label class="color-radio">
-                        <input type="radio" name="variations" value="orange">
-                        <div class="color-circle orange"></div>
-                    </label>
-                    <label class="color-radio">
-                        <input type="radio" name="variations" value="green">
-                        <div class="color-circle green"></div>
-                    </label>
-                    <label class="color-radio">
-                        <input type="radio" name="variations" value="blue">
-                        <div class="color-circle blue"></div>
-                    </label>
-                </div>
-            </td>
-        </tr>
-    </tbody>
-</table>      
-        
-<div class="comments-section">
-    <div class="comment-field small">
-            <label>Commentaires sur les qualités de service</label>
-            <textarea id="qualites" name="qualites" placeholder="Saisir les qualités de frappe du joueur..."></textarea>
+            <thead>
+                <tr>
+                    <th style="width: 35%;">Bloc d'observation Tennis : Service</th>
+                    <th>Évaluation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="evaluation-row">
+                    <td>Qualité 1ère balle</td>
+                    <td>
+                        <div class="color-options" aria-label="Évaluation Qualité 1ère balle">
+                            <label class="color-radio" tabindex="0"><input type="radio" name="service_1" value="red" aria-label="Insuffisant"><div class="color-circle red"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="service_1" value="orange" aria-label="Moyen"><div class="color-circle orange"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="service_1" value="green" aria-label="Bien"><div class="color-circle green"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="service_1" value="blue" aria-label="Excellent"><div class="color-circle blue"></div></label>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="evaluation-row">
+                    <td>Qualité 2ème balle</td>
+                    <td>
+                        <div class="color-options" aria-label="Évaluation Qualité 2ème balle">
+                            <label class="color-radio" tabindex="0"><input type="radio" name="service_2" value="red" aria-label="Insuffisant"><div class="color-circle red"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="service_2" value="orange" aria-label="Moyen"><div class="color-circle orange"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="service_2" value="green" aria-label="Bien"><div class="color-circle green"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="service_2" value="blue" aria-label="Excellent"><div class="color-circle blue"></div></label>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="evaluation-row">
+                    <td>Variations</td>
+                    <td>
+                        <div class="color-options" aria-label="Évaluation Variations service">
+                            <label class="color-radio" tabindex="0"><input type="radio" name="variations" value="red" aria-label="Insuffisant"><div class="color-circle red"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="variations" value="orange" aria-label="Moyen"><div class="color-circle orange"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="variations" value="green" aria-label="Bien"><div class="color-circle green"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="variations" value="blue" aria-label="Excellent"><div class="color-circle blue"></div></label>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="comments-section">
+            <div class="comment-field small">
+                <label for="qualites_service">Commentaires sur les qualités de service</label>
+                <textarea id="qualites_service" name="qualites_service" placeholder="Saisir les qualités de service du joueur..." aria-label="Commentaires sur les qualités de service"></textarea>
+            </div>
+        </div>
     </div>
-</div>
+    <div class="section-divider"></div>
 
-<div class="section-divider"></div>
-    
+    <!-- --- BLOC SENS DU JEU --- -->
     <div class="evaluation-section">
         <table class="evaluation-table">
-    <thead>
-        <tr>
-            <th style="width: 35%;">Bloc d'observation Tennis : Sens du jeu</th>
-	    <th>Évaluation</th>
-        </tr>
-
-    </thead>
-    <tbody>
-        <tr class="evaluation-row">
-            <td>Occupation du terrain</td>
-            <td>
-                <div class="color-options">
-                    <label class="color-radio">
-                        <input type="radio" name="occupation" value="red">
-                        <div class="color-circle red"></div>
-                    </label>
-                    <label class="color-radio">
-                        <input type="radio" name="occupation" value="orange">
-                        <div class="color-circle orange"></div>
-                    </label>
-                    <label class="color-radio">
-                        <input type="radio" name="occupation" value="green">
-                        <div class="color-circle green"></div>
-                    </label>
-                    <label class="color-radio">
-                        <input type="radio" name="occupation" value="blue">
-                        <div class="color-circle blue"></div>
-                    </label>
-                </div>
-            </td>
-        </tr>
-        <tr class="evaluation-row">
-            <td>Sens Tactique</td>
-            <td>
-                <div class="color-options">
-                    <label class="color-radio">
-                        <input type="radio" name="tactique" value="red">
-                        <div class="color-circle red"></div>
-                    </label>
-                    <label class="color-radio">
-                        <input type="radio" name="tactique" value="orange">
-                        <div class="color-circle orange"></div>
-                    </label>
-                    <label class="color-radio">
-                        <input type="radio" name="tactique" value="green">
-                        <div class="color-circle green"></div>
-                    </label>
-                    <label class="color-radio">
-                        <input type="radio" name="tactique" value="blue">
-                        <div class="color-circle blue"></div>
-                    </label>
-                </div>
-            </td>
-        </tr>
-    <tr class="evaluation-row">
-            <td>Sens de l'anticipation</td>
-            <td>
-                <div class="color-options">
-                    <label class="color-radio">
-                        <input type="radio" name="anticipation" value="red">
-                        <div class="color-circle red"></div>
-                    </label>
-                    <label class="color-radio">
-                        <input type="radio" name="anticipation" value="orange">
-                        <div class="color-circle orange"></div>
-                    </label>
-                    <label class="color-radio">
-                        <input type="radio" name="anticipation" value="green">
-                        <div class="color-circle green"></div>
-                    </label>
-                    <label class="color-radio">
-                        <input type="radio" name="anticipation" value="blue">
-                        <div class="color-circle blue"></div>
-                    </label>
-                </div>
-            </td>
-        </tr>
-    </tbody>
-</table>      
-        
-<div class="comments-section">
-    <div class="comment-field small">
-            <label>Commentaires sur le sens du jeu</label>
-            <textarea id="qualites" name="qualites" placeholder="Saisir les qualités de sens du jeu du joueur..."></textarea>
+            <thead>
+                <tr>
+                    <th style="width: 35%;">Bloc d'observation Tennis : Sens du jeu</th>
+                    <th>Évaluation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="evaluation-row">
+                    <td>Occupation du terrain</td>
+                    <td>
+                        <div class="color-options" aria-label="Évaluation Occupation du terrain">
+                            <label class="color-radio" tabindex="0"><input type="radio" name="occupation" value="red" aria-label="Insuffisant"><div class="color-circle red"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="occupation" value="orange" aria-label="Moyen"><div class="color-circle orange"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="occupation" value="green" aria-label="Bien"><div class="color-circle green"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="occupation" value="blue" aria-label="Excellent"><div class="color-circle blue"></div></label>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="evaluation-row">
+                    <td>Sens Tactique</td>
+                    <td>
+                        <div class="color-options" aria-label="Évaluation Sens tactique">
+                            <label class="color-radio" tabindex="0"><input type="radio" name="tactique" value="red" aria-label="Insuffisant"><div class="color-circle red"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="tactique" value="orange" aria-label="Moyen"><div class="color-circle orange"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="tactique" value="green" aria-label="Bien"><div class="color-circle green"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="tactique" value="blue" aria-label="Excellent"><div class="color-circle blue"></div></label>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="evaluation-row">
+                    <td>Sens de l'anticipation</td>
+                    <td>
+                        <div class="color-options" aria-label="Évaluation Sens de l'anticipation">
+                            <label class="color-radio" tabindex="0"><input type="radio" name="anticipation" value="red" aria-label="Insuffisant"><div class="color-circle red"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="anticipation" value="orange" aria-label="Moyen"><div class="color-circle orange"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="anticipation" value="green" aria-label="Bien"><div class="color-circle green"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="anticipation" value="blue" aria-label="Excellent"><div class="color-circle blue"></div></label>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="comments-section">
+            <div class="comment-field small">
+                <label for="qualites_sens_jeu">Commentaires sur le sens du jeu</label>
+                <textarea id="qualites_sens_jeu" name="qualites_sens_jeu" placeholder="Saisir les qualités de sens du jeu du joueur..." aria-label="Commentaires sur le sens du jeu"></textarea>
+            </div>
+        </div>
     </div>
-</div>
+    <div class="section-divider"></div>
 
-
-
-<div class="section-divider"></div>
-    
+    <!-- --- BLOC PHYSIQUE --- -->
     <div class="evaluation-section">
         <table class="evaluation-table">
-    <thead>
-        <tr>
-            <th style="width: 35%;">Bloc d'observation Physique : Qualités physiques</th>
-	    <th>Évaluation</th>
-        </tr>
-
-    </thead>
-    <tbody>
-        <tr class="evaluation-row">
-            <td>Déplacements</td>
-            <td>
-                <div class="color-options">
-                    <label class="color-radio">
-                        <input type="radio" name="deplacement" value="red">
-                        <div class="color-circle red"></div>
-                    </label>
-                    <label class="color-radio">
-                        <input type="radio" name="deplacement" value="orange">
-                        <div class="color-circle orange"></div>
-                    </label>
-                    <label class="color-radio">
-                        <input type="radio" name="deplacement" value="green">
-                        <div class="color-circle green"></div>
-                    </label>
-                    <label class="color-radio">
-                        <input type="radio" name="deplacement" value="blue">
-                        <div class="color-circle blue"></div>
-                    </label>
-                </div>
-            </td>
-        </tr>
-        <tr class="evaluation-row">
-            <td>Coordination</td>
-            <td>
-                <div class="color-options">
-                    <label class="color-radio">
-                        <input type="radio" name="coordination" value="red">
-                        <div class="color-circle red"></div>
-                    </label>
-                    <label class="color-radio">
-                        <input type="radio" name="coordination" value="orange">
-                        <div class="color-circle orange"></div>
-                    </label>
-                    <label class="color-radio">
-                        <input type="radio" name="coordination" value="green">
-                        <div class="color-circle green"></div>
-                    </label>
-                    <label class="color-radio">
-                        <input type="radio" name="coordination" value="blue">
-                        <div class="color-circle blue"></div>
-                    </label>
-                </div>
-            </td>
-        </tr>
-    <tr class="evaluation-row">
-            <td>Goût de l'effort</td>
-            <td>
-                <div class="color-options">
-                    <label class="color-radio">
-                        <input type="radio" name="effort" value="red">
-                        <div class="color-circle red"></div>
-                    </label>
-                    <label class="color-radio">
-                        <input type="radio" name="effort" value="orange">
-                        <div class="color-circle orange"></div>
-                    </label>
-                    <label class="color-radio">
-                        <input type="radio" name="effort" value="green">
-                        <div class="color-circle green"></div>
-                    </label>
-                    <label class="color-radio">
-                        <input type="radio" name="effort" value="blue">
-                        <div class="color-circle blue"></div>
-                    </label>
-                </div>
-            </td>
-        </tr>
-    </tbody>
-</table>      
-        
-<div class="comments-section">
-    <div class="comment-field small">
-            <label>Commentaires sur les qualités physiques</label>
-            <textarea id="qualites" name="qualites" placeholder="Saisir les qualités physiques du joueur..."></textarea>
+            <thead>
+                <tr>
+                    <th style="width: 35%;">Bloc d'observation Physique : Qualités physiques</th>
+                    <th>Évaluation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="evaluation-row">
+                    <td>Déplacements</td>
+                    <td>
+                        <div class="color-options" aria-label="Évaluation Déplacements">
+                            <label class="color-radio" tabindex="0"><input type="radio" name="deplacement" value="red" aria-label="Insuffisant"><div class="color-circle red"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="deplacement" value="orange" aria-label="Moyen"><div class="color-circle orange"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="deplacement" value="green" aria-label="Bien"><div class="color-circle green"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="deplacement" value="blue" aria-label="Excellent"><div class="color-circle blue"></div></label>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="evaluation-row">
+                    <td>Coordination</td>
+                    <td>
+                        <div class="color-options" aria-label="Évaluation Coordination">
+                            <label class="color-radio" tabindex="0"><input type="radio" name="coordination" value="red" aria-label="Insuffisant"><div class="color-circle red"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="coordination" value="orange" aria-label="Moyen"><div class="color-circle orange"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="coordination" value="green" aria-label="Bien"><div class="color-circle green"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="coordination" value="blue" aria-label="Excellent"><div class="color-circle blue"></div></label>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="evaluation-row">
+                    <td>Goût de l'effort</td>
+                    <td>
+                        <div class="color-options" aria-label="Évaluation Goût de l'effort">
+                            <label class="color-radio" tabindex="0"><input type="radio" name="effort" value="red" aria-label="Insuffisant"><div class="color-circle red"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="effort" value="orange" aria-label="Moyen"><div class="color-circle orange"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="effort" value="green" aria-label="Bien"><div class="color-circle green"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="effort" value="blue" aria-label="Excellent"><div class="color-circle blue"></div></label>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="comments-section">
+            <div class="comment-field small">
+                <label for="qualites_physique">Commentaires sur les qualités physiques</label>
+                <textarea id="qualites_physique" name="qualites_physique" placeholder="Saisir les qualités physiques du joueur..." aria-label="Commentaires sur les qualités physiques"></textarea>
+            </div>
+        </div>
     </div>
-</div>
+    <div class="section-divider"></div>
 
-
-        
-        
-        
-        <div class="section-divider"></div>
-        
+    <!-- --- BLOC VIE DE GROUPE --- -->
+    <div class="evaluation-section">
         <table class="evaluation-table">
             <thead>
                 <tr>
                     <th style="width: 35%;">Bloc d'observation : Vie en groupe</th>
-                    <th></th>
+                    <th>Évaluation</th>
                 </tr>
             </thead>
             <tbody>
                 <tr class="evaluation-row">
                     <td>Autonomie</td>
                     <td>
-                        <div class="color-options">
-                            <label class="color-radio">
-                                <input type="radio" name="autonomie" value="red">
-                                <div class="color-circle red"></div>
-                            </label>
-                            <label class="color-radio">
-                                <input type="radio" name="autonomie" value="orange">
-                                <div class="color-circle orange"></div>
-                            </label>
-                            <label class="color-radio">
-                                <input type="radio" name="autonomie" value="green">
-                                <div class="color-circle green"></div>
-                            </label>
-                            <label class="color-radio">
-                                <input type="radio" name="autonomie" value="blue">
-                                <div class="color-circle blue"></div>
-                            </label>
+                        <div class="color-options" aria-label="Évaluation Autonomie">
+                            <label class="color-radio" tabindex="0"><input type="radio" name="autonomie" value="red" aria-label="Insuffisant"><div class="color-circle red"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="autonomie" value="orange" aria-label="Moyen"><div class="color-circle orange"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="autonomie" value="green" aria-label="Bien"><div class="color-circle green"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="autonomie" value="blue" aria-label="Excellent"><div class="color-circle blue"></div></label>
                         </div>
                     </td>
                 </tr>
                 <tr class="evaluation-row">
                     <td>Respect du cadre</td>
                     <td>
-                        <div class="color-options">
-                            <label class="color-radio">
-                                <input type="radio" name="respect_cadre" value="red">
-                                <div class="color-circle red"></div>
-                            </label>
-                            <label class="color-radio">
-                                <input type="radio" name="respect_cadre" value="orange">
-                                <div class="color-circle orange"></div>
-                            </label>
-                            <label class="color-radio">
-                                <input type="radio" name="respect_cadre" value="green">
-                                <div class="color-circle green"></div>
-                            </label>
-                            <label class="color-radio">
-                                <input type="radio" name="respect_cadre" value="blue">
-                                <div class="color-circle blue"></div>
-                            </label>
+                        <div class="color-options" aria-label="Évaluation Respect du cadre">
+                            <label class="color-radio" tabindex="0"><input type="radio" name="respect_cadre" value="red" aria-label="Insuffisant"><div class="color-circle red"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="respect_cadre" value="orange" aria-label="Moyen"><div class="color-circle orange"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="respect_cadre" value="green" aria-label="Bien"><div class="color-circle green"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="respect_cadre" value="blue" aria-label="Excellent"><div class="color-circle blue"></div></label>
                         </div>
                     </td>
                 </tr>
                 <tr class="evaluation-row">
                     <td>Relations aux autres</td>
                     <td>
-                        <div class="color-options">
-                            <label class="color-radio">
-                                <input type="radio" name="relations_autres" value="red">
-                                <div class="color-circle red"></div>
-                            </label>
-                            <label class="color-radio">
-                                <input type="radio" name="relations_autres" value="orange">
-                                <div class="color-circle orange"></div>
-                            </label>
-                            <label class="color-radio">
-                                <input type="radio" name="relations_autres" value="green">
-                                <div class="color-circle green"></div>
-                            </label>
-                            <label class="color-radio">
-                                <input type="radio" name="relations_autres" value="blue">
-                                <div class="color-circle blue"></div>
-                            </label>
+                        <div class="color-options" aria-label="Évaluation Relations aux autres">
+                            <label class="color-radio" tabindex="0"><input type="radio" name="relations_autres" value="red" aria-label="Insuffisant"><div class="color-circle red"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="relations_autres" value="orange" aria-label="Moyen"><div class="color-circle orange"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="relations_autres" value="green" aria-label="Bien"><div class="color-circle green"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="relations_autres" value="blue" aria-label="Excellent"><div class="color-circle blue"></div></label>
                         </div>
                     </td>
                 </tr>
                 <tr class="evaluation-row">
                     <td>Esprit de groupe</td>
                     <td>
-                        <div class="color-options">
-                            <label class="color-radio">
-                                <input type="radio" name="esprit_groupe" value="red">
-                                <div class="color-circle red"></div>
-                            </label>
-                            <label class="color-radio">
-                                <input type="radio" name="esprit_groupe" value="orange">
-                                <div class="color-circle orange"></div>
-                            </label>
-                            <label class="color-radio">
-                                <input type="radio" name="esprit_groupe" value="green">
-                                <div class="color-circle green"></div>
-                            </label>
-                            <label class="color-radio">
-                                <input type="radio" name="esprit_groupe" value="blue">
-                                <div class="color-circle blue"></div>
-                            </label>
+                        <div class="color-options" aria-label="Évaluation Esprit de groupe">
+                            <label class="color-radio" tabindex="0"><input type="radio" name="esprit_groupe" value="red" aria-label="Insuffisant"><div class="color-circle red"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="esprit_groupe" value="orange" aria-label="Moyen"><div class="color-circle orange"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="esprit_groupe" value="green" aria-label="Bien"><div class="color-circle green"></div></label>
+                            <label class="color-radio" tabindex="0"><input type="radio" name="esprit_groupe" value="blue" aria-label="Excellent"><div class="color-circle blue"></div></label>
                         </div>
                     </td>
                 </tr>
             </tbody>
         </table>
-
-    <div class="comments-section">
-    <div class="comment-field small">
-            <label>Commentaires sur les qualités Vie de groupe</label>
-            <textarea id="qualites" name="qualites" placeholder="Saisir les qualités Vie de groupe du joueur..."></textarea>
+        <div class="comments-section">
+            <div class="comment-field small">
+                <label for="qualites_groupe">Commentaires sur les qualités Vie de groupe</label>
+                <textarea id="qualites_groupe" name="qualites_groupe" placeholder="Saisir les qualités Vie de groupe du joueur..." aria-label="Commentaires sur la vie de groupe"></textarea>
+            </div>
+        </div>
     </div>
-
-    
     <div class="section-divider"></div>
-    
+
+    <!-- --- BILAN GÉNÉRAL --- -->
     <div class="comments-section">
         <div class="comment-field small">
-            <label>Bilan général</label>
-            <textarea id="qualites" name="qualites" placeholder="Saisir le bilan général sur le joueur..."></textarea>
+            <label for="bilan_general">Bilan général</label>
+            <textarea id="bilan_general" name="bilan_general" placeholder="Saisir le bilan général sur le joueur..." aria-label="Bilan général"></textarea>
         </div>
-        
         <div class="comment-field small">
-            <label>Points forts / Points à améliorer </label>
-            <textarea id="points_ameliorer" name="points_ameliorer" placeholder="Saisir les points forts, points à améliorer..."></textarea>
+            <label for="points_ameliorer">Points forts / Points à améliorer </label>
+            <textarea id="points_ameliorer" name="points_ameliorer" placeholder="Saisir les points forts, points à améliorer..." aria-label="Points forts et à améliorer"></textarea>
         </div>
-        
         <div class="comment-field large">
-            <label>Vision pour la suite avec ton coach</label>
-            <textarea id="vision_suite" name="vision_suite" placeholder="Objectifs et recommandations pour la suite de l'apprentissage..."></textarea>
+            <label for="vision_suite">Vision pour la suite avec ton coach</label>
+            <textarea id="vision_suite" name="vision_suite" placeholder="Objectifs et recommandations pour la suite de l'apprentissage..." aria-label="Vision pour la suite"></textarea>
         </div>
-        
         <div class="footer-fields">
             <div class="footer-field">
-                <label>Évaluation faite par</label>
-                <input type="text" id="coach_referent" name="coach_referent" placeholder="Nom du coach">
+                <label for="coach_referent">Évaluation faite par</label>
+                <input type="text" id="coach_referent" name="coach_referent" placeholder="Nom du coach" aria-label="Évaluation faite par">
             </div>
-            
             <div class="footer-field">
-                <label>Date</label>
-                <input type="date" id="date" name="date">
+                <label for="date">Date</label>
+                <input type="date" id="date" name="date" aria-label="Date">
             </div>
         </div>
     </div>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    
     <script>
         // Auto-calculate percentage and defeats
         function calculateStats() {
             const victoires = parseInt(document.getElementById('victoires').value) || 0;
             const matchs = parseInt(document.getElementById('matchs_joues').value) || 0;
-            
             if (matchs > 0) {
                 const defaites = matchs - victoires;
                 const percentage = Math.round((victoires / matchs) * 100);
-                
                 document.getElementById('defaites').value = Math.max(0, defaites);
                 document.getElementById('pourcentage').value = percentage;
             } else {
@@ -868,56 +625,39 @@
                 document.getElementById('pourcentage').value = '';
             }
         }
-        
-        // Add event listeners for automatic calculation
         document.getElementById('victoires').addEventListener('input', calculateStats);
         document.getElementById('matchs_joues').addEventListener('input', calculateStats);
-        
-        // Validation to prevent victories > matches
         document.getElementById('victoires').addEventListener('input', function() {
             const victoires = parseInt(this.value) || 0;
             const matchs = parseInt(document.getElementById('matchs_joues').value) || 0;
-            
             if (victoires > matchs && matchs > 0) {
                 alert('Le nombre de victoires ne peut pas être supérieur au nombre de matchs joués');
                 this.value = matchs;
                 calculateStats();
             }
         });
-        
-        // Handle gender selection (exclusive checkboxes)
-        document.getElementById('masculin').addEventListener('change', function() {
-            if (this.checked) {
-                document.getElementById('feminin').checked = false;
-            }
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('date').value = new Date().toISOString().split('T')[0];
         });
-        
-        document.getElementById('feminin').addEventListener('change', function() {
-            if (this.checked) {
-                document.getElementById('masculin').checked = false;
-            }
+        document.querySelectorAll('input[type="radio"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                this.nextElementSibling.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    this.nextElementSibling.style.transform = 'scale(1)';
+                }, 200);
+            });
         });
-        
-        // Generate PDF function - single page only
         async function generatePDF() {
             try {
-                // Check if required libraries are loaded
                 if (typeof window.jspdf === 'undefined' || typeof html2canvas === 'undefined') {
                     alert('Erreur: Les bibliothèques PDF ne sont pas chargées. Veuillez rafraîchir la page.');
                     return;
                 }
-                
                 const { jsPDF } = window.jspdf;
-                
-                // Show loading message
                 const originalText = document.querySelector('.download-btn').innerHTML;
                 document.querySelector('.download-btn').innerHTML = '⏳ Génération en cours...';
                 document.querySelector('.download-btn').disabled = true;
-                
-                // Hide the download button before capturing
                 document.querySelector('.no-print').style.display = 'none';
-                
-                // Use html2canvas to capture the form - optimized for single page
                 const canvas = await html2canvas(document.body, {
                     scale: 1.2,
                     useCORS: true,
@@ -926,69 +666,36 @@
                     scrollX: 0,
                     scrollY: 0
                 });
-                
-                // Show the button again
                 document.querySelector('.no-print').style.display = 'block';
                 document.querySelector('.download-btn').innerHTML = originalText;
                 document.querySelector('.download-btn').disabled = false;
-                
                 const imgData = canvas.toDataURL('image/png', 1.0);
                 const pdf = new jsPDF('p', 'mm', 'a4');
-                
-                // Calculate dimensions to fit on single A4 page
                 const imgWidth = 210; // A4 width in mm
                 const pageHeight = 297; // A4 height in mm
                 const imgHeight = (canvas.height * imgWidth) / canvas.width;
-                
-                // If image is taller than page, scale it down to fit
                 if (imgHeight > pageHeight) {
                     const scaleFactor = pageHeight / imgHeight;
                     const scaledWidth = imgWidth * scaleFactor;
                     const scaledHeight = pageHeight;
-                    const xOffset = (imgWidth - scaledWidth) / 2; // Center horizontally
-                    
+                    const xOffset = (imgWidth - scaledWidth) / 2;
                     pdf.addImage(imgData, 'PNG', xOffset, 0, scaledWidth, scaledHeight);
                 } else {
-                    // Image fits, center it vertically
                     const yOffset = (pageHeight - imgHeight) / 2;
                     pdf.addImage(imgData, 'PNG', 0, yOffset, imgWidth, imgHeight);
                 }
-                
-                // Get the player name for filename
                 const prenom = document.getElementById('prenom').value || 'Joueur';
                 const date = new Date().toLocaleDateString('fr-FR').replace(/\//g, '-');
-                
                 pdf.save(`Fiche_Bilan_${prenom}_${date}.pdf`);
-                
-                // Success message
                 alert('✅ PDF généré avec succès !');
-                
             } catch (error) {
                 console.error('Erreur lors de la génération du PDF:', error);
                 alert('❌ Erreur lors de la génération du PDF. Veuillez réessayer.');
-                
-                // Reset button
                 document.querySelector('.download-btn').innerHTML = originalText;
                 document.querySelector('.download-btn').disabled = false;
                 document.querySelector('.no-print').style.display = 'block';
             }
         }
-        
-        // Set current date by default
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('date').value = new Date().toISOString().split('T')[0];
-        });
-        
-        // Add some visual feedback for color selection
-        document.querySelectorAll('input[type="radio"]').forEach(radio => {
-            radio.addEventListener('change', function() {
-                // Add a small animation when selected
-                this.nextElementSibling.style.transform = 'scale(1.1)';
-                setTimeout(() => {
-                    this.nextElementSibling.style.transform = 'scale(1)';
-                }, 200);
-            });
-        });
     </script>
 </body>
 </html>
