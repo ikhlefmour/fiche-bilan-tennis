@@ -604,119 +604,135 @@
         });
         
         async function generatePDF() {
-            try {
-                if (typeof window.jspdf === 'undefined' || typeof html2canvas === 'undefined') {
-                    alert('Erreur: Les bibliothèques PDF ne sont pas chargées. Veuillez rafraîchir la page.');
-                    return;
-                }
-                const { jsPDF } = window.jspdf;
-                const originalText = document.querySelector('.download-btn').innerHTML;
-                document.querySelector('.download-btn').innerHTML = '⏳ Génération en cours...';
-                document.querySelector('.download-btn').disabled = true;
-                document.querySelector('.no-print').style.display = 'none';
-                
-                // SOLUTION : Remplacer les textareas par des divs pour la capture PDF
-                const textareas = document.querySelectorAll('textarea');
-                const originalElements = [];
-                
-                textareas.forEach((textarea, index) => {
-                    // Sauvegarder l'élément original
-                    originalElements[index] = {
-                        element: textarea,
-                        parent: textarea.parentNode,
-                        nextSibling: textarea.nextSibling
-                    };
-                    
-                    // Créer un div de remplacement avec le même style
-                    const div = document.createElement('div');
-                    div.style.cssText = window.getComputedStyle(textarea).cssText;
-                    div.style.whiteSpace = 'pre-wrap';
-                    div.style.wordWrap = 'break-word';
-                    div.style.overflow = 'visible';
-                    div.style.height = 'auto';
-                    div.style.minHeight = textarea.style.height || '90px';
-                    div.style.padding = '12px';
-                    div.style.border = '3px solid black';
-                    div.style.backgroundColor = 'white';
-                    div.style.fontFamily = 'Arial, sans-serif';
-                    div.style.fontSize = '14px';
-                    div.style.lineHeight = '1.4';
-                    div.style.boxSizing = 'border-box';
-                    div.style.width = '100%';
-                    
-                    // Copier le contenu
-                    div.textContent = textarea.value || '';
-                    
-                    // Remplacer temporairement
-                    textarea.parentNode.replaceChild(div, textarea);
-                });
-                
-                // Capturer avec html2canvas
-                const canvas = await html2canvas(document.body, {
-                    scale: 1.2,
-                    useCORS: true,
-                    backgroundColor: '#ffffff',
-                    allowTaint: true,
-                    scrollX: 0,
-                    scrollY: 0,
-                    height: document.body.scrollHeight,
-                    windowWidth: document.body.scrollWidth
-                });
-                
-                // Restaurer les textareas originales
-                originalElements.forEach((original, index) => {
-                    const currentDiv = document.querySelectorAll('div')[index];
-                    if (original.nextSibling) {
-                        original.parent.insertBefore(original.element, original.nextSibling);
-                    } else {
-                        original.parent.appendChild(original.element);
-                    }
-                    // Supprimer le div temporaire s'il existe encore
-                    const divs = document.querySelectorAll('div');
-                    divs.forEach(div => {
-                        if (div.textContent === original.element.value && div !== original.element) {
-                            if (div.parentNode) {
-                                div.parentNode.removeChild(div);
-                            }
-                        }
-                    });
-                });
-                
-                document.querySelector('.no-print').style.display = 'block';
-                document.querySelector('.download-btn').innerHTML = originalText;
-                document.querySelector('.download-btn').disabled = false;
-                
-                const imgData = canvas.toDataURL('image/png', 1.0);
-                const pdf = new jsPDF('p', 'mm', 'a4');
-                const imgWidth = 210; // A4 width in mm
-                const pageHeight = 297; // A4 height in mm
-                const imgHeight = (canvas.height * imgWidth) / canvas.width;
-                
-                if (imgHeight > pageHeight) {
-                    const scaleFactor = pageHeight / imgHeight;
-                    const scaledWidth = imgWidth * scaleFactor;
-                    const scaledHeight = pageHeight;
-                    const xOffset = (imgWidth - scaledWidth) / 2;
-                    pdf.addImage(imgData, 'PNG', xOffset, 0, scaledWidth, scaledHeight);
-                } else {
-                    const yOffset = (pageHeight - imgHeight) / 2;
-                    pdf.addImage(imgData, 'PNG', 0, yOffset, imgWidth, imgHeight);
-                }
-
-                const prenom = document.getElementById('prenom').value.trim() || 'Prenom';
-                const nom = document.getElementById('nom').value.trim() || 'Nom';
-                const date = new Date().toLocaleDateString('fr-FR').replace(/\//g, '-');
-                pdf.save(`Fiche_Bilan_${prenom}_${nom}_${date}.pdf`);
-                alert('✅ PDF généré avec succès !');
-            } catch (error) {
-                console.error('Erreur lors de la génération du PDF:', error);
-                alert('❌ Erreur lors de la génération du PDF. Veuillez réessayer.');
-                document.querySelector('.download-btn').innerHTML = originalText;
-                document.querySelector('.download-btn').disabled = false;
-                document.querySelector('.no-print').style.display = 'block';
-            }
+    try {
+        if (typeof window.jspdf === 'undefined' || typeof html2canvas === 'undefined') {
+            alert('Erreur: Les bibliothèques PDF ne sont pas chargées. Veuillez rafraîchir la page.');
+            return;
         }
-    </script>
+        const { jsPDF } = window.jspdf;
+        const originalText = document.querySelector('.download-btn').innerHTML;
+        document.querySelector('.download-btn').innerHTML = '⏳ Génération en cours...';
+        document.querySelector('.download-btn').disabled = true;
+        document.querySelector('.no-print').style.display = 'none';
+        
+        // AJOUT : Forcer le scroll en haut et ajouter de l'espace en bas
+        window.scrollTo(0, 0);
+        document.body.style.paddingBottom = '50px'; // Ajouter de l'espace en bas
+        
+        // SOLUTION : Remplacer les textareas par des divs pour la capture PDF
+        const textareas = document.querySelectorAll('textarea');
+        const originalElements = [];
+        
+        textareas.forEach((textarea, index) => {
+            // Sauvegarder l'élément original
+            originalElements[index] = {
+                element: textarea,
+                parent: textarea.parentNode,
+                nextSibling: textarea.nextSibling
+            };
+            
+            // Créer un div de remplacement avec le même style
+            const div = document.createElement('div');
+            div.style.cssText = window.getComputedStyle(textarea).cssText;
+            div.style.whiteSpace = 'pre-wrap';
+            div.style.wordWrap = 'break-word';
+            div.style.overflow = 'visible';
+            div.style.height = 'auto';
+            div.style.minHeight = textarea.style.height || '90px';
+            div.style.padding = '12px';
+            div.style.border = '3px solid black';
+            div.style.backgroundColor = 'white';
+            div.style.fontFamily = 'Arial, sans-serif';
+            div.style.fontSize = '14px';
+            div.style.lineHeight = '1.4';
+            div.style.boxSizing = 'border-box';
+            div.style.width = '100%';
+            
+            // Copier le contenu
+            div.textContent = textarea.value || '';
+            
+            // Remplacer temporairement
+            textarea.parentNode.replaceChild(div, textarea);
+        });
+        
+        // MODIFICATION : Capturer avec des paramètres améliorés
+        const canvas = await html2canvas(document.body, {
+            scale: 1.2,
+            useCORS: true,
+            backgroundColor: '#ffffff',
+            allowTaint: true,
+            scrollX: 0,
+            scrollY: 0,
+            height: document.body.scrollHeight + 100, // Ajouter 100px de marge
+            windowWidth: document.body.scrollWidth,
+            onclone: function(clonedDoc) {
+                // S'assurer que le footer est visible dans le clone
+                const clonedFooter = clonedDoc.querySelector('.footer-fields');
+                if (clonedFooter) {
+                    clonedFooter.style.marginBottom = '50px';
+                    clonedFooter.style.paddingBottom = '20px';
+                }
+            }
+        });
+        
+        // Restaurer le padding original
+        document.body.style.paddingBottom = '';
+        
+        // Restaurer les textareas originales
+        originalElements.forEach((original, index) => {
+            const currentDiv = document.querySelectorAll('div')[index];
+            if (original.nextSibling) {
+                original.parent.insertBefore(original.element, original.nextSibling);
+            } else {
+                original.parent.appendChild(original.element);
+            }
+            // Supprimer le div temporaire s'il existe encore
+            const divs = document.querySelectorAll('div');
+            divs.forEach(div => {
+                if (div.textContent === original.element.value && div !== original.element) {
+                    if (div.parentNode) {
+                        div.parentNode.removeChild(div);
+                    }
+                }
+            });
+        });
+        
+        document.querySelector('.no-print').style.display = 'block';
+        document.querySelector('.download-btn').innerHTML = originalText;
+        document.querySelector('.download-btn').disabled = false;
+        
+        const imgData = canvas.toDataURL('image/png', 1.0);
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        const imgWidth = 210; // A4 width in mm
+        const pageHeight = 297; // A4 height in mm
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+        
+        // MODIFICATION : Ajuster le positionnement pour éviter de couper le footer
+        if (imgHeight > pageHeight) {
+            const scaleFactor = (pageHeight - 20) / imgHeight; // Garder 20mm de marge
+            const scaledWidth = imgWidth * scaleFactor;
+            const scaledHeight = (pageHeight - 20);
+            const xOffset = (imgWidth - scaledWidth) / 2;
+            pdf.addImage(imgData, 'PNG', xOffset, 10, scaledWidth, scaledHeight); // Commencer à 10mm du haut
+        } else {
+            const yOffset = Math.max(10, (pageHeight - imgHeight - 20) / 2); // Au moins 10mm du haut, 20mm du bas
+            pdf.addImage(imgData, 'PNG', 0, yOffset, imgWidth, Math.min(imgHeight, pageHeight - 30));
+        }
+
+        const prenom = document.getElementById('prenom').value.trim() || 'Prenom';
+        const nom = document.getElementById('nom').value.trim() || 'Nom';
+        const date = new Date().toLocaleDateString('fr-FR').replace(/\//g, '-');
+        pdf.save(`Fiche_Bilan_${prenom}_${nom}_${date}.pdf`);
+        alert('✅ PDF généré avec succès !');
+    } catch (error) {
+        console.error('Erreur lors de la génération du PDF:', error);
+        alert('❌ Erreur lors de la génération du PDF. Veuillez réessayer.');
+        document.querySelector('.download-btn').innerHTML = originalText;
+        document.querySelector('.download-btn').disabled = false;
+        document.querySelector('.no-print').style.display = 'block';
+    }
+}    
+</script>
 
 
  </div>
