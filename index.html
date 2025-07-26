@@ -156,18 +156,22 @@
         .comment-field.large textarea {
             height: 150px;
         }
-        /* Suppression des classes .small et .large car la hauteur sera automatique */
-        .footer-fields {
-            display: flex;
-            gap: 40px;
-            margin-top: 15px;
-        }
-        .footer-field label {
-            font-weight: bold;
-            display: block;
-            margin-bottom: 8px;
-            font-size: 16px;
-        }
+       .footer-fields {
+    display: flex;
+    gap: 20px;
+    margin-top: 15px;
+    align-items: center;
+}
+.footer-field {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.footer-field label {
+    font-weight: bold;
+    font-size: 16px;
+    white-space: nowrap;
+}
         .download-btn {
             background: #DC143C;
             color: white;
@@ -548,16 +552,17 @@
             <label for="bilan_general">Bilan général</label>
             <textarea id="bilan_general" name="bilan_general" placeholder="Saisir les Points forts / Points à améliorer pour le joueur..." aria-label="Bilan général"></textarea>
         </div>
-        <div class="footer-fields">
-            <div class="footer-field">
-                <label for="coach_referent">Évaluation faite par</label>
-                <input type="text" id="coach_referent" name="coach_referent" placeholder="Nom du coach" aria-label="Évaluation faite par">
-            </div>
-            <div class="footer-field">
-                <label for="date">Date</label>
-                <input type="date" id="date" name="date" aria-label="Date">
-            </div>
-        </div>
+
+       <div class="footer-fields">
+    <div class="footer-field">
+        <label for="coach_referent">Évaluation faite par</label>
+        <input type="text" id="coach_referent" name="coach_referent" placeholder="Nom du coach" aria-label="Évaluation faite par">
+    </div>
+    <div class="footer-field">
+        <label for="date">Date</label>
+        <input type="date" id="date" name="date" aria-label="Date">
+    </div>
+</div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
