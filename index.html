@@ -17,11 +17,22 @@
             line-height: 1.2;
             font-size: 12px;
         }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
+        .main-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+        .header, .form-section, .evaluation-section, .comments-section, .footer-fields {
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .comment-field textarea,
+        .footer-field input,
+        .stats-table,
+        .evaluation-table {
+            width: 100%;
+            box-sizing: border-box;
         }
         .title {
             text-align: center;
@@ -29,9 +40,6 @@
             font-weight: bold;
             margin: 15px 0 30px 0; 
             letter-spacing: 2px;
-        }
-        .form-section {
-            margin-bottom: 10px;
         }
         .form-row {
             display: flex;
@@ -57,62 +65,26 @@
             height: 20px;
             font-size: 11px;
         }
-        .checkbox-group {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-        .checkbox-group input[type="checkbox"] {
-            width: 15px;
-            height: 15px;
-            accent-color: black;
-        }
-        .stats-table {
-            width: 100%;
+        .stats-table, .evaluation-table {
             border-collapse: collapse;
             margin: 10px 0;
         }
-        .stats-table th, .stats-table td {
+        .stats-table th, .stats-table td,
+        .evaluation-table th, .evaluation-row td {
             border: 2px solid black;
             padding: 8px;
-            text-align: center;
             font-weight: bold;
             font-size: 11px;
         }
         .stats-table th {
             background: #f5f5f5;
-        }
-        .stats-table input {
-            border: none;
-            background: transparent;
             text-align: center;
-            width: 60px;
-            font-weight: bold;
-            font-size: 11px;
-        }
-        .evaluation-section {
-            margin: 10px 0;
-        }
-        .evaluation-table {
-            width: 100%;
-            border-collapse: collapse;
         }
         .evaluation-table th {
             background: black;
             color: white;
-            padding: 8px;
             text-align: center;
             font-size: 12px;
-            font-weight: bold;
-        }
-        .evaluation-row {
-            border: 2px solid black;
-        }
-        .evaluation-row td {
-            padding: 6px;
-            border-right: 2px solid black;
-            font-weight: bold;
-            font-size: 11px;
         }
         .evaluation-row td:first-child {
             background: #f9f9f9;
@@ -134,13 +106,6 @@
             position: relative;
             transition: transform 0.2s;
             outline: none;
-        }
-        .color-radio:focus-within, .color-radio:focus {
-            box-shadow: 0 0 2px 2px #1E90FF;
-            outline: 2px solid #1E90FF;
-        }
-        .color-radio:hover {
-            transform: scale(1.1);
         }
         .color-radio input[type="radio"] {
             display: none;
@@ -166,20 +131,7 @@
         .orange { background-color: #FF8C00; }
         .green { background-color: #228B22; }
         .blue { background-color: #1E90FF; }
-        .comments-section {
-            margin-top: 20px;
-        }
-        .comment-field {
-            margin-bottom: 15px;
-        }
-        .comment-field label {
-            font-weight: bold;
-            display: block;
-            margin-bottom: 8px;
-            font-size: 16px;
-        }
         .comment-field textarea {
-            width: 100%;
             border: 3px solid black;
             padding: 12px;
             resize: vertical;
@@ -197,20 +149,11 @@
             gap: 40px;
             margin-top: 15px;
         }
-        .footer-field {
-            flex: 1;
-        }
         .footer-field label {
             font-weight: bold;
             display: block;
             margin-bottom: 8px;
             font-size: 16px;
-        }
-        .footer-field input {
-            width: 100%;
-            border: 3px solid black;
-            padding: 12px;
-            font-size: 14px;
         }
         .download-btn {
             background: #DC143C;
@@ -245,7 +188,10 @@
     <div class="no-print">
         <button class="download-btn" onclick="generatePDF()">📄 TÉLÉCHARGER LE PDF INTERACTIF</button>
     </div>
-    <div style="display: flex; justify-content: center; margin-top: 10px; margin-bottom: 10px;">
+
+  <div class="main-container">
+
+<div style="display: flex; justify-content: center; margin-top: 10px; margin-bottom: 10px;">
         <img src="https://ikhlefmour.github.io/fiche-bilan-tennis/logo.png" alt="Logo"
             style="height: 240px; width: auto; display: block;">
     </div>
@@ -684,9 +630,11 @@
                     const yOffset = (pageHeight - imgHeight) / 2;
                     pdf.addImage(imgData, 'PNG', 0, yOffset, imgWidth, imgHeight);
                 }
-                const prenom = document.getElementById('prenom').value || 'Joueur';
-                const date = new Date().toLocaleDateString('fr-FR').replace(/\//g, '-');
-                pdf.save(`Fiche_Bilan_${prenom}_${date}.pdf`);
+
+		const prenom = document.getElementById('prenom').value.trim() || 'Prenom';
+		const nom = document.getElementById('nom').value.trim() || 'Nom';
+		const date = new Date().toLocaleDateString('fr-FR').replace(/\//g, '-');
+		pdf.save(`Fiche_Bilan_${prenom}_${nom}_${date}.pdf`);
                 alert('✅ PDF généré avec succès !');
             } catch (error) {
                 console.error('Erreur lors de la génération du PDF:', error);
@@ -697,5 +645,8 @@
             }
         }
     </script>
+
+
+ </div>
 </body>
 </html>
