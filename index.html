@@ -134,16 +134,29 @@
         .comment-field textarea {
             border: 3px solid black;
             padding: 12px;
-            resize: vertical;
+            resize: none;
             font-family: Arial, sans-serif;
             font-size: 14px;
+            line-height: 1.4;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            box-sizing: border-box;
+            overflow-y: auto;
         }
+        
+        /* Hauteurs fixes adaptées selon le type de commentaire */
         .comment-field.small textarea {
-            height: 60px;
+            height: 90px;
         }
+        
+        .comment-field.medium textarea {
+            height: 120px;
+        }
+        
         .comment-field.large textarea {
-            height: 80px;
+            height: 150px;
         }
+        /* Suppression des classes .small et .large car la hauteur sera automatique */
         .footer-fields {
             display: flex;
             gap: 40px;
@@ -254,8 +267,8 @@
     </table>
     <div class="section-divider"></div>
     <div style="margin: 10px 0; font-size: 12px; text-align: center;">
-        <b>Légende couleurs :</b>
-        <span style="color:#DC143C;">● Rouge</span> (Insuffisant)  |  <span style="color:#FF8C00;">● Orange</span> (Moyen)  |  <span style="color:#228B22;">● Vert</span> (Bien)  |  <span style="color:#1E90FF;">● Bleu</span> (Excellent)
+        <b>Légende couleurs :</b>
+        <span style="color:#DC143C;">● Rouge</span> (Insuffisant)  |  <span style="color:#FF8C00;">● Orange</span> (Moyen)  |  <span style="color:#228B22;">● Vert</span> (Bien)  |  <span style="color:#1E90FF;">● Bleu</span> (Excellent)
     </div>
     <div class="section-divider"></div>
 
@@ -531,7 +544,7 @@
 
     <!-- --- BILAN GÉNÉRAL --- -->
     <div class="comments-section">
-        <div class="comment-field small">
+        <div class="comment-field medium">
             <label for="bilan_general">Bilan général</label>
             <textarea id="bilan_general" name="bilan_general" placeholder="Saisir les Points forts / Points à améliorer pour le joueur..." aria-label="Bilan général"></textarea>
         </div>
@@ -553,6 +566,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
+        // Version simplifiée - pas de redimensionnement automatique
+        document.addEventListener('DOMContentLoaded', function() {
+            // Définir la date par défaut
+            document.getElementById('date').value = new Date().toISOString().split('T')[0];
+        });
+
         // Auto-calculate percentage and defeats
         function calculateStats() {
             const victoires = parseInt(document.getElementById('victoires').value) || 0;
@@ -578,9 +597,7 @@
                 calculateStats();
             }
         });
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('date').value = new Date().toISOString().split('T')[0];
-        });
+
         document.querySelectorAll('input[type="radio"]').forEach(radio => {
             radio.addEventListener('change', function() {
                 this.nextElementSibling.style.transform = 'scale(1.1)';
@@ -589,6 +606,7 @@
                 }, 200);
             });
         });
+        
         async function generatePDF() {
             try {
                 if (typeof window.jspdf === 'undefined' || typeof html2canvas === 'undefined') {
@@ -600,22 +618,84 @@
                 document.querySelector('.download-btn').innerHTML = '⏳ Génération en cours...';
                 document.querySelector('.download-btn').disabled = true;
                 document.querySelector('.no-print').style.display = 'none';
+                
+                // SOLUTION : Remplacer les textareas par des divs pour la capture PDF
+                const textareas = document.querySelectorAll('textarea');
+                const originalElements = [];
+                
+                textareas.forEach((textarea, index) => {
+                    // Sauvegarder l'élément original
+                    originalElements[index] = {
+                        element: textarea,
+                        parent: textarea.parentNode,
+                        nextSibling: textarea.nextSibling
+                    };
+                    
+                    // Créer un div de remplacement avec le même style
+                    const div = document.createElement('div');
+                    div.style.cssText = window.getComputedStyle(textarea).cssText;
+                    div.style.whiteSpace = 'pre-wrap';
+                    div.style.wordWrap = 'break-word';
+                    div.style.overflow = 'visible';
+                    div.style.height = 'auto';
+                    div.style.minHeight = textarea.style.height || '90px';
+                    div.style.padding = '12px';
+                    div.style.border = '3px solid black';
+                    div.style.backgroundColor = 'white';
+                    div.style.fontFamily = 'Arial, sans-serif';
+                    div.style.fontSize = '14px';
+                    div.style.lineHeight = '1.4';
+                    div.style.boxSizing = 'border-box';
+                    div.style.width = '100%';
+                    
+                    // Copier le contenu
+                    div.textContent = textarea.value || '';
+                    
+                    // Remplacer temporairement
+                    textarea.parentNode.replaceChild(div, textarea);
+                });
+                
+                // Capturer avec html2canvas
                 const canvas = await html2canvas(document.body, {
                     scale: 1.2,
                     useCORS: true,
                     backgroundColor: '#ffffff',
                     allowTaint: true,
                     scrollX: 0,
-                    scrollY: 0
+                    scrollY: 0,
+                    height: document.body.scrollHeight,
+                    windowWidth: document.body.scrollWidth
                 });
+                
+                // Restaurer les textareas originales
+                originalElements.forEach((original, index) => {
+                    const currentDiv = document.querySelectorAll('div')[index];
+                    if (original.nextSibling) {
+                        original.parent.insertBefore(original.element, original.nextSibling);
+                    } else {
+                        original.parent.appendChild(original.element);
+                    }
+                    // Supprimer le div temporaire s'il existe encore
+                    const divs = document.querySelectorAll('div');
+                    divs.forEach(div => {
+                        if (div.textContent === original.element.value && div !== original.element) {
+                            if (div.parentNode) {
+                                div.parentNode.removeChild(div);
+                            }
+                        }
+                    });
+                });
+                
                 document.querySelector('.no-print').style.display = 'block';
                 document.querySelector('.download-btn').innerHTML = originalText;
                 document.querySelector('.download-btn').disabled = false;
+                
                 const imgData = canvas.toDataURL('image/png', 1.0);
                 const pdf = new jsPDF('p', 'mm', 'a4');
                 const imgWidth = 210; // A4 width in mm
                 const pageHeight = 297; // A4 height in mm
                 const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                
                 if (imgHeight > pageHeight) {
                     const scaleFactor = pageHeight / imgHeight;
                     const scaledWidth = imgWidth * scaleFactor;
@@ -627,10 +707,10 @@
                     pdf.addImage(imgData, 'PNG', 0, yOffset, imgWidth, imgHeight);
                 }
 
-		const prenom = document.getElementById('prenom').value.trim() || 'Prenom';
-		const nom = document.getElementById('nom').value.trim() || 'Nom';
-		const date = new Date().toLocaleDateString('fr-FR').replace(/\//g, '-');
-		pdf.save(`Fiche_Bilan_${prenom}_${nom}_${date}.pdf`);
+                const prenom = document.getElementById('prenom').value.trim() || 'Prenom';
+                const nom = document.getElementById('nom').value.trim() || 'Nom';
+                const date = new Date().toLocaleDateString('fr-FR').replace(/\//g, '-');
+                pdf.save(`Fiche_Bilan_${prenom}_${nom}_${date}.pdf`);
                 alert('✅ PDF généré avec succès !');
             } catch (error) {
                 console.error('Erreur lors de la génération du PDF:', error);
