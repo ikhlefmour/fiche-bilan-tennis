@@ -583,7 +583,7 @@
                         <tr>
                             <td><input type="number" id="matchs_joues" name="matchs_joues" placeholder="0" min="0"></td>
                             <td><input type="number" id="victoires" name="victoires" placeholder="0" min="0"></td>
-                            <td><input type="number" id="defaites" name="defaites" placeholder="0" readonly></td>
+                            <td><input type="text" id="defaites" name="defaites" placeholder="0" readonly></td>
                             <td><input type="text" id="pourcentage" name="pourcentage" placeholder="0%" readonly></td>
                         </tr>
                     </tbody>
@@ -1258,7 +1258,11 @@
                     { element: document.querySelector('.stats-section'), name: 'stats' },
                     { element: document.querySelector('.legend-card'), name: 'legend' },
                     ...Array.from(document.querySelectorAll('.evaluation-section')).map((el, i) => ({ element: el, name: `evaluation-${i}` })),
-                    { element: document.querySelector('.final-section'), name: 'final' },
+                    { 
+                        element: document.querySelector('.final-section'), 
+                        name: 'final',
+                        combineWithNext: true // Indicateur pour combiner avec le footer
+                    },
                     { element: document.querySelector('.footer-section'), name: 'footer' }
                 ].filter(section => section.element !== null);
 
@@ -1271,10 +1275,126 @@
                 let isFirstElement = true;
                 let pageCount = 1; // Compteur de pages
 
-                for (const section of sections) {
+                for (let i = 0; i < sections.length; i++) {
+                    const section = sections[i];
                     console.log('Processing section:', section.name); // Debug
                     
-                    // Capturer chaque section individuellement
+                    // Vérifier si on doit combiner avec la section suivante (final + footer)
+                    if (section.combineWithNext && i + 1 < sections.length) {
+                        const nextSection = sections[i + 1];
+                        
+                        // Créer un conteneur temporaire pour combiner final-section et footer
+                        const combinedContainer = document.createElement('div');
+                        combinedContainer.style.background = 'white';
+                        combinedContainer.style.padding = '0';
+                        combinedContainer.style.fontFamily = "'Inter', Arial, sans-serif";
+                        combinedContainer.style.fontSize = '13px';
+                        combinedContainer.style.lineHeight = '1.5';
+                        combinedContainer.style.color = '#2c3e50';
+                        
+                        // Cloner les deux sections avec préservation complète des styles
+                        const finalClone = section.element.cloneNode(true);
+                        const footerClone = nextSection.element.cloneNode(true);
+                        
+                        // Forcer les styles de base sur les clones pour assurer la cohérence
+                        finalClone.style.fontFamily = "'Inter', Arial, sans-serif";
+                        finalClone.style.fontSize = '13px';
+                        finalClone.style.lineHeight = '1.5';
+                        finalClone.style.color = '#2c3e50';
+                        finalClone.style.marginBottom = '15mm';
+                        
+                        footerClone.style.fontFamily = "'Inter', Arial, sans-serif";
+                        footerClone.style.fontSize = '13px';
+                        footerClone.style.lineHeight = '1.5';
+                        footerClone.style.color = '#2c3e50';
+                        
+                        // Appliquer les styles aux éléments enfants du footer pour assurer la cohérence
+                        const footerLabels = footerClone.querySelectorAll('label');
+                        footerLabels.forEach(label => {
+                            label.style.fontFamily = "'Inter', Arial, sans-serif";
+                            label.style.fontSize = '13px';
+                            label.style.fontWeight = '600';
+                            label.style.color = '#2c3e50';
+                        });
+                        
+                        const footerInputs = footerClone.querySelectorAll('input');
+                        footerInputs.forEach(input => {
+                            input.style.fontFamily = "'Inter', Arial, sans-serif";
+                            input.style.fontSize = '13px';
+                            input.style.fontWeight = '500';
+                        });
+                        
+                        combinedContainer.appendChild(finalClone);
+                        combinedContainer.appendChild(footerClone);
+                        
+                        // Ajouter temporairement au DOM (invisible)
+                        combinedContainer.style.position = 'absolute';
+                        combinedContainer.style.left = '-9999px';
+                        combinedContainer.style.top = '0';
+                        combinedContainer.style.width = mainContainer.offsetWidth + 'px';
+                        document.body.appendChild(combinedContainer);
+                        
+                        // Attendre que les styles se propagent
+                        await new Promise(resolve => setTimeout(resolve, 100));
+                        
+                        // Capturer la section combinée avec les mêmes paramètres que les autres sections
+                        const combinedCanvas = await html2canvas(combinedContainer, {
+                            scale: 1.2,
+                            useCORS: true,
+                            backgroundColor: '#ffffff',
+                            allowTaint: false,
+                            scrollX: 0,
+                            scrollY: 0,
+                            width: combinedContainer.scrollWidth,
+                            height: combinedContainer.scrollHeight,
+                            windowWidth: combinedContainer.scrollWidth,
+                            windowHeight: combinedContainer.scrollHeight,
+                            onclone: function(clonedDoc) {
+                                // Appliquer les styles de base au document cloné
+                                const clonedBody = clonedDoc.body;
+                                clonedBody.style.fontFamily = "'Inter', Arial, sans-serif";
+                                clonedBody.style.fontSize = '13px';
+                                clonedBody.style.lineHeight = '1.5';
+                                clonedBody.style.color = '#2c3e50';
+                                
+                                // Forcer les styles sur tous les éléments du clone
+                                const allElements = clonedDoc.querySelectorAll('*');
+                                allElements.forEach(el => {
+                                    if (!el.style.fontFamily || el.style.fontFamily === '') {
+                                        el.style.fontFamily = "'Inter', Arial, sans-serif";
+                                    }
+                                    if (!el.style.fontSize || el.style.fontSize === '') {
+                                        el.style.fontSize = '13px';
+                                    }
+                                });
+                            }
+                        });
+                        
+                        // Nettoyer le DOM
+                        document.body.removeChild(combinedContainer);
+                        
+                        const combinedImgData = combinedCanvas.toDataURL('image/png', 0.95);
+                        const combinedWidth = pdfWidth - (margin * 2);
+                        const combinedHeight = (combinedCanvas.height * combinedWidth) / combinedCanvas.width;
+                        
+                        // Vérifier si la section combinée tient sur la page courante
+                        if (!isFirstElement && (currentPageY + combinedHeight) > (pdfHeight - margin - 15)) {
+                            pdf.addPage();
+                            pageCount++;
+                            currentPageY = margin;
+                        }
+                        
+                        // Ajouter la section combinée au PDF
+                        pdf.addImage(combinedImgData, 'PNG', margin, currentPageY, combinedWidth, combinedHeight);
+                        currentPageY += combinedHeight + 5;
+                        isFirstElement = false;
+                        
+                        // Passer la section suivante (footer) car elle a déjà été traitée
+                        i++;
+                        continue;
+                    }
+                    
+                    // Capturer chaque section individuellement (comportement normal)
                     const sectionCanvas = await html2canvas(section.element, {
                         scale: 1.2,
                         useCORS: true,
